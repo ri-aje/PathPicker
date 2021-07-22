@@ -462,15 +462,15 @@ class Controller:
         self.update_scroll_offset()
 
     def process_input(self, key: str) -> None:
-        if key in ["k", "UP"]:
+        if key in ["k", "e", "UP"]:
             self.move_index(-1)
-        elif key in ["j", "DOWN"]:
+        elif key in ["j", "n", "DOWN"]:
             self.move_index(1)
         elif key == "x":
             self.toggle_x_mode()
         elif key == "c":
             self.begin_enter_command()
-        elif key in [" ", "NPAGE"]:
+        elif key in ["NPAGE"]:
             self.page_down()
         elif key in ["b", "PPAGE"]:
             self.page_up()
@@ -480,11 +480,14 @@ class Controller:
             self.jump_to_index(self.num_matches - 1)
         elif key == "d":
             self.describe_file()
-        elif key == "f":
-            self.toggle_select()
-        elif key == "F":
+        # elif key == "F":
+        #     self.toggle_select()
+        elif key in ["f", " "]:
             self.toggle_select()
             self.move_index(1)
+        elif key == "F":
+            self.toggle_select()
+            self.move_index(-1)
         elif key == "A" and not self.mode == X_MODE:
             self.toggle_select_all()
         elif key == "ENTER" and (
